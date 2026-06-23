@@ -20,15 +20,21 @@ const Banner = () => {
             Book trusted doctors <br /> without the waiting room.
           </h1>
           <p className="mt-4 max-w-md font-body text-ink/60">
-            MediCare Connect brings patients, doctors, and hospitals onto one secure
-            platform — book appointments, pay online, and manage your medical
-            records in a few clicks.
+            MediCare Connect brings patients, doctors, and hospitals onto one
+            secure platform — book appointments, pay online, and manage your
+            medical records in a few clicks.
           </p>
           <div className="mt-7 flex gap-4">
-            <Link href="/find-doctors" className="btn border-none bg-primary px-8 text-white hover:bg-primary-dark">
+            <Link
+              href="/find-doctors"
+              className="btn border-none bg-primary px-8 text-white hover:bg-primary-dark"
+            >
               Find a Doctor
             </Link>
-            <Link href="/register" className="btn btn-outline border-primary px-8 text-primary hover:bg-primary hover:text-white">
+            <Link
+              href="/register"
+              className="btn btn-outline border-primary px-8 text-primary hover:bg-primary hover:text-white"
+            >
               Get Started
             </Link>
           </div>

@@ -8,10 +8,9 @@ export const metadata = {
     "Book doctor appointments, manage prescriptions, and access healthcare services online with MediCare Connect.",
 };
 
-
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="medicare">
+    <html lang="en" >
       <body className="font-body">
         <AuthProvider>
           {children}

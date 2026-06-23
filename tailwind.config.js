@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/app/**/*.{js,jsx}", "./src/components/**/*.{js,jsx}"],
+  content: [
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}",
+    "./hooks/**/*.{js,jsx,ts,tsx}",
+    "./lib/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
@@ -14,10 +19,6 @@ module.exports = {
           dark: "#D9622F",
         },
         ink: "#102A28",
-      },
-      fontFamily: {
-        display: ["var(--font-display)"],
-        body: ["var(--font-body)"],
       },
     },
   },

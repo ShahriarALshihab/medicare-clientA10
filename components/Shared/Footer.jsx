@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { FaStethoscope, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {
+  FaStethoscope,
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedin,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -15,7 +21,8 @@ const Footer = () => {
             </span>
           </div>
           <p className="font-body text-sm text-white/60">
-            Connecting patients and doctors through a single, secure healthcare platform.
+            Connecting patients and doctors through a single, secure healthcare
+            platform.
           </p>
         </div>
 
@@ -24,10 +31,18 @@ const Footer = () => {
             Quick Links
           </h4>
           <ul className="flex flex-col gap-2 font-body text-sm text-white/60">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/find-doctors">Find Doctors</Link></li>
-            <li><Link href="/about">About Us</Link></li>
-            <li><Link href="/contact">Contact Us</Link></li>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/find-doctors">Find Doctors</Link>
+            </li>
+            <li>
+              <Link href="/about">About Us</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact Us</Link>
+            </li>
           </ul>
         </div>
 
@@ -46,7 +61,9 @@ const Footer = () => {
           <h4 className="mb-3 font-display text-sm font-semibold uppercase tracking-wide text-white">
             Emergency Hotline
           </h4>
-          <p className="font-display text-2xl font-bold text-accent">999-HEALTH</p>
+          <p className="font-display text-2xl font-bold text-accent">
+            999-HEALTH
+          </p>
           <div className="mt-4 flex gap-3 text-white/70">
             <FaFacebook /> <FaTwitter /> <FaInstagram /> <FaLinkedin />
           </div>
@@ -56,6 +73,7 @@ const Footer = () => {
       <div className="border-t border-white/10 py-4 text-center font-body text-xs text-white/50">
         © {new Date().getFullYear()} MediCare Connect. All rights reserved.
       </div>
+      <div className="bg-red-500 text-white p-10">Tailwind Working</div>
     </footer>
   );
 };
