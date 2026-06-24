@@ -133,16 +133,8 @@ export default function RegisterPage() {
             onChange={handlePhotoUpload}
             className="file-input file-input-bordered w-full"
           />
-          <input
-            name="photoUrl"
-            type="url"
-            placeholder="...or paste an image URL"
-            className="input input-bordered mt-2 w-full"
-            disabled={!!photo}
-          />
-          {uploading && (
-            <p className="mt-1 text-xs text-ink/50">Uploading photo...</p>
-          )}
+
+          {uploading && <p className="mt-1 text-xs text-ink/50">...</p>}
         </div>
 
         <input

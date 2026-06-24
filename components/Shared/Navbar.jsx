@@ -25,14 +25,14 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-primary/10 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-primary/10 bg-white/30 backdrop-blur">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-8">
         <Link href="/" className="flex items-center gap-2">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white">
             <FaStethoscope size={18} />
           </span>
           <span className="font-display text-lg font-bold text-ink">
-            MediCare<span className="text-primary"> Connect</span>
+            MediCare<span className="text-accent"> Connect</span>
           </span>
         </Link>
 
@@ -62,7 +62,10 @@ const Navbar = () => {
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full ring ring-primary/30 ring-offset-2">
                   <Image
-                    src={user.photoURL || "https://i.ibb.co/2KdcM6T/default-avatar.png"}
+                    src={
+                      user.photoURL ||
+                      "https://i.ibb.co/2KdcM6T/default-avatar.png"
+                    }
                     alt={user.displayName || "User"}
                     width={40}
                     height={40}
@@ -73,7 +76,9 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu dropdown-content menu-sm z-50 mt-3 w-52 rounded-xl bg-white p-2 shadow-lg"
               >
-                <li className="px-3 py-1 text-xs text-ink/50">{user.displayName}</li>
+                <li className="px-3 py-1 text-xs text-ink/50">
+                  {user.displayName}
+                </li>
                 <li>
                   <Link href="/dashboard/profile">My Profile</Link>
                 </li>
@@ -90,14 +95,21 @@ const Navbar = () => {
               <Link href="/login" className="btn btn-ghost btn-sm font-body">
                 Login
               </Link>
-              <Link href="/register" className="btn btn-sm border-none bg-accent font-body text-white hover:bg-accent-dark">
+              <Link
+                href="/register"
+                className="btn btn-sm border-none bg-accent font-body text-white hover:bg-accent-dark"
+              >
                 Register
               </Link>
             </>
           )}
         </div>
 
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+        <button
+          className="md:hidden"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+        >
           {open ? <HiX size={26} /> : <HiMenu size={26} />}
         </button>
       </nav>
@@ -105,25 +117,45 @@ const Navbar = () => {
       {open && (
         <div className="flex flex-col gap-3 border-t border-primary/10 bg-white px-4 py-4 md:hidden">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className="font-body text-ink/80">
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="font-body text-ink/80"
+            >
               {link.label}
             </Link>
           ))}
           {user ? (
             <>
-              <Link href="/dashboard" onClick={() => setOpen(false)} className="font-body text-ink/80">
+              <Link
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+                className="font-body text-ink/80"
+              >
                 Dashboard
               </Link>
-              <button onClick={handleLogOut} className="btn btn-sm bg-primary text-white">
+              <button
+                onClick={handleLogOut}
+                className="btn btn-sm bg-primary text-white"
+              >
                 Log Out
               </button>
             </>
           ) : (
             <div className="flex gap-3">
-              <Link href="/login" onClick={() => setOpen(false)} className="btn btn-ghost btn-sm flex-1">
+              <Link
+                href="/login"
+                onClick={() => setOpen(false)}
+                className="btn btn-ghost btn-sm flex-1"
+              >
                 Login
               </Link>
-              <Link href="/register" onClick={() => setOpen(false)} className="btn btn-sm flex-1 bg-accent text-white">
+              <Link
+                href="/register"
+                onClick={() => setOpen(false)}
+                className="btn btn-sm flex-1 bg-accent text-white"
+              >
                 Register
               </Link>
             </div>

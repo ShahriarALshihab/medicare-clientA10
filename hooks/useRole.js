@@ -4,33 +4,57 @@ import { useEffect, useState } from "react";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 
-// Returns { role, status, roleLoading } for the currently logged-in user.
-// Useful for showing/hiding dashboard menu items and guarding routes.
 const useRole = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
+
   const [role, setRole] = useState(null);
   const [status, setStatus] = useState(null);
   const [roleLoading, setRoleLoading] = useState(true);
 
   useEffect(() => {
-    if (!user?.email || loading) {
-      setRoleLoading(loading);
+    console.log("useRole fired:", user?.email);
+
+    if (loading) {
+      setRoleLoading(true);
+      return;
+    }
+
+    if (!user?.email) {
+      setRole(null);
+      setStatus(null);
+      setRoleLoading(false);
       return;
     }
 
     setRoleLoading(true);
+
     axiosSecure
       .get(`/users/role/${user.email}`)
       .then((res) => {
+        console.log("ROLE SUCCESS:", res.data);
+
         setRole(res.data.role);
         setStatus(res.data.status);
       })
-      .finally(() => setRoleLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.email, loading]);
+      .catch((err) => {
+        console.error("ROLE ERROR:", err);
 
-  return { role, status, roleLoading };
+        setRole(null);
+        setStatus(null);
+      })
+      .finally(() => {
+        console.log("ROLE FINISHED");
+
+        setRoleLoading(false);
+      });
+  }, [user?.email, loading, axiosSecure]);
+
+  return {
+    role,
+    status,
+    roleLoading,
+  };
 };
 
 export default useRole;

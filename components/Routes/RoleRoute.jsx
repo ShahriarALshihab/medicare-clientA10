@@ -2,24 +2,30 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import useAuth from "@/hooks/useAuth";
+import useRole from "@/hooks/useRole";
 import LoadingSpinner from "@/components/Shared/LoadingSpinner";
+import PrivateRoute from "./PrivateRoute";
 
-const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+// Usage: <RoleRoute allowed={["admin"]}>...</RoleRoute>
+const RoleRoute = ({ children, allowed = [] }) => {
+  const { role, roleLoading } = useRole();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push("/login");
+    if (!roleLoading && role && !allowed.includes(role)) {
+      router.push("/dashboard");
     }
-  }, [loading, user, router]);
+  }, [roleLoading, role, allowed, router]);
 
-  if (loading || !user) {
-    return <LoadingSpinner message="Checking your session..." />;
-  }
-
-  return children;
+  return (
+    <PrivateRoute>
+      {roleLoading || !role || !allowed.includes(role) ? (
+        <LoadingSpinner message="Checking permissions..." />
+      ) : (
+        children
+      )}
+    </PrivateRoute>
+  );
 };
 
-export default PrivateRoute;
+export default RoleRoute;

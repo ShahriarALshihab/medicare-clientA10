@@ -1,31 +1,30 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
-import useRole from "@/hooks/useRole";
+import useAuth from "@/hooks/useAuth";
 import LoadingSpinner from "@/components/Shared/LoadingSpinner";
-import PrivateRoute from "./PrivateRoute";
 
-// Usage: <RoleRoute allowed={["admin"]}>...</RoleRoute>
-const RoleRoute = ({ children, allowed = [] }) => {
-  const { role, roleLoading } = useRole();
+const PrivateRoute = ({ children }) => {
+  const { user, loading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (!roleLoading && role && !allowed.includes(role)) {
-      router.push("/dashboard");
+    if (!loading && !user && pathname !== "/login") {
+      router.replace("/login");
     }
-  }, [roleLoading, role, allowed, router]);
+  }, [loading, user, pathname, router]);
 
-  return (
-    <PrivateRoute>
-      {roleLoading || !role || !allowed.includes(role) ? (
-        <LoadingSpinner message="Checking permissions..." />
-      ) : (
-        children
-      )}
-    </PrivateRoute>
-  );
+  if (loading) {
+    return <LoadingSpinner message="Checking your session..." />;
+  }
+
+  if (!user) {
+    return null;
+  }
+
+  return children;
 };
 
-export default RoleRoute;
+export default PrivateRoute;

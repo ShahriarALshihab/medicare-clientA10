@@ -52,7 +52,7 @@ const Footer = () => {
           </h4>
           <ul className="flex flex-col gap-2 font-body text-sm text-white/60">
             <li>support@medicareconnect.com</li>
-            <li>+1 (800) 555-0192</li>
+            <li>+8801777111111</li>
             <li>24/7 Care Avenue, Dhaka</li>
           </ul>
         </div>
@@ -73,7 +73,6 @@ const Footer = () => {
       <div className="border-t border-white/10 py-4 text-center font-body text-xs text-white/50">
         © {new Date().getFullYear()} MediCare Connect. All rights reserved.
       </div>
-      <div className="bg-red-500 text-white p-10">Tailwind Working</div>
     </footer>
   );
 };

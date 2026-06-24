@@ -16,12 +16,18 @@ export default function DashboardLayout({ children }) {
 function DashboardShell({ children }) {
   const { role, roleLoading } = useRole();
 
-  if (roleLoading) return <LoadingSpinner message="Loading your dashboard..." />;
+  if (roleLoading) {
+    return (
+      <LoadingSpinner message="Loading your dashboard..." />
+    );
+  }
 
   return (
-    <div className="flex min-h-[80vh] w-full flex-col md:flex-row">
+    <div className="flex min-h-screen">
       <Sidebar role={role} />
-      <div className="flex-1 bg-primary-light/40 p-5 md:p-8">{children}</div>
+      <main className="flex-1 p-6">
+        {children}
+      </main>
     </div>
   );
 }

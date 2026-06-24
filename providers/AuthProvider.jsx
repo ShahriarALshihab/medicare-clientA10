@@ -21,8 +21,13 @@ const AuthProvider = ({ children }) => {
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  
-  const registerUser = async (name, email, password, photo, extraDoctorFields = {}) => {
+  const registerUser = async (
+    name,
+    email,
+    password,
+    photo,
+    extraDoctorFields = {},
+  ) => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(result.user, { displayName: name, photoURL: photo });
 
@@ -47,7 +52,6 @@ const AuthProvider = ({ children }) => {
   const loginWithGoogle = async () => {
     const result = await signInWithPopup(auth, googleProvider);
 
-    
     await axiosPublic.post("/users", {
       name: result.user.displayName,
       email: result.user.email,
@@ -65,13 +69,12 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
- 
   const exchangeForBackendJWT = async (firebaseUser) => {
     const idToken = await firebaseUser.getIdToken();
     const { data } = await axiosPublic.post(
       "/jwt",
       {},
-      { headers: { Authorization: `Bearer ${idToken}` } }
+      { headers: { Authorization: `Bearer ${idToken}` } },
     );
     localStorage.setItem("medicare-token", data.token);
     setRole(data.role);
@@ -80,23 +83,31 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      console.log("AUTH CHANGED", currentUser?.email);
+
       setUser(currentUser);
+
       if (currentUser) {
         try {
-          // Refresh the backend JWT so role + expiry always stay current.
+          console.log("JWT exchange started");
+
           await exchangeForBackendJWT(currentUser);
+
+          console.log("JWT exchange finished");
         } catch (err) {
-          console.error("Could not refresh backend JWT", err);
+          console.error(err);
         }
       } else {
         localStorage.removeItem("medicare-token");
         setRole(null);
       }
+
+      console.log("SETTING LOADING FALSE");
+
       setLoading(false);
     });
 
     return () => unsubscribe();
-
   }, []);
 
   const authInfo = {
@@ -109,7 +120,9 @@ const AuthProvider = ({ children }) => {
     logOut,
   };
 
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

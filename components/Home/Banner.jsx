@@ -11,7 +11,7 @@ const Banner = () => {
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
         >
           <p className="mb-3 font-body text-sm font-semibold uppercase tracking-wider text-primary">
             Healthcare, simplified
@@ -43,7 +43,7 @@ const Banner = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
+          transition={{ duration: 0.9, delay: 0.15 }}
           className="relative h-72 w-full overflow-hidden rounded-3xl shadow-xl md:h-96"
         >
           <Image
