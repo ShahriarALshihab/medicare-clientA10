@@ -161,7 +161,7 @@ export default function RegisterPage() {
             />
             <input
               name="qualifications"
-              placeholder="Qualifications (e.g. MBBS, FCPS)"
+              placeholder="Qualifications"
               className="input input-bordered input-sm w-full"
             />
             <div className="flex gap-3">
@@ -177,7 +177,7 @@ export default function RegisterPage() {
                 type="number"
                 min="0"
                 required
-                placeholder="Consultation fee ($)"
+                placeholder="Consultation fee"
                 className="input input-bordered input-sm w-full"
               />
             </div>

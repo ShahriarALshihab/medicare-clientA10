@@ -10,7 +10,7 @@ export default function AuthLayout({ children }) {
             <FaStethoscope size={18} />
           </span>
           <span className="font-display text-lg font-bold text-ink">
-            MediCare<span className="text-primary"> Connect</span>
+            MediCare<span className="text-accent"> Connect</span>
           </span>
         </Link>
       </div>

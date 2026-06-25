@@ -43,23 +43,50 @@ export default function LoginPage() {
   return (
     <div className="mx-auto flex max-w-md flex-col gap-6 px-4 py-20">
       <div className="text-center">
-        <h1 className="font-display text-3xl font-bold text-ink">Welcome back</h1>
-        <p className="font-body text-sm text-ink/50">Log in to manage your appointments</p>
+        <h1 className="font-display text-3xl font-bold text-ink">
+          Welcome back!
+        </h1>
+        <p className="font-body text-sm text-ink/50">
+          Log in to manage your appointments
+        </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-2xl border border-primary/10 bg-white p-7 shadow-sm">
-        <input name="email" type="email" required placeholder="Email Address" className="input input-bordered w-full" />
-        <input name="password" type="password" required placeholder="Password" className="input input-bordered w-full" />
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 rounded-2xl border border-primary/10 bg-white p-7 shadow-sm"
+      >
+        <input
+          name="email"
+          type="email"
+          required
+          placeholder="Email Address"
+          className="input input-bordered w-full"
+        />
+        <input
+          name="password"
+          type="password"
+          required
+          placeholder="Password"
+          className="input input-bordered w-full"
+        />
 
         {error && <p className="text-sm text-error">{error}</p>}
 
-        <button type="submit" disabled={submitting} className="btn border-none bg-primary text-white hover:bg-primary-dark">
+        <button
+          type="submit"
+          disabled={submitting}
+          className="btn border-none bg-primary text-white hover:bg-primary-dark"
+        >
           {submitting ? "Logging in..." : "Login"}
         </button>
 
         <div className="divider text-xs text-ink/40">OR</div>
 
-        <button type="button" onClick={handleGoogle} className="btn btn-outline gap-2 border-primary/20">
+        <button
+          type="button"
+          onClick={handleGoogle}
+          className="btn btn-outline gap-2 border-primary/20"
+        >
           <FcGoogle size={20} /> Continue with Google
         </button>
 

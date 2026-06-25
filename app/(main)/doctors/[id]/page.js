@@ -66,7 +66,7 @@ export default function DoctorDetailsPage() {
     }
   };
 
-  if (loading) return <LoadingSpinner message="Loading doctor profile..." />;
+  if (loading) return <LoadingSpinner message="Loading..." />;
   if (!doctor) return <p className="py-20 text-center">Doctor not found.</p>;
 
   return (
