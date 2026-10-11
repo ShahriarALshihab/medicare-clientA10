@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "@/hooks/useAuth";
 import usePageTitle from "@/hooks/usePageTitle";
 import axios from "axios";
@@ -20,6 +21,7 @@ export default function RegisterPage() {
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handlePhotoUpload = async (e) => {
     const file = e.target.files[0];
@@ -133,17 +135,26 @@ export default function RegisterPage() {
             onChange={handlePhotoUpload}
             className="file-input file-input-bordered w-full"
           />
-
-          {uploading && <p className="mt-1 text-xs text-ink/50">...</p>}
+          {uploading && <p className="mt-1 text-xs text-ink/50">Uploading...</p>}
         </div>
 
-        <input
-          name="password"
-          type="password"
-          required
-          placeholder="Password"
-          className="input input-bordered w-full"
-        />
+      
+        <div className="relative">
+          <input
+            name="password"
+            type={showPassword ? "text" : "password"}
+            required
+            placeholder="Password"
+            className="input input-bordered w-full pr-12"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-ink/40 hover:text-ink transition-colors"
+          >
+            {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+          </button>
+        </div>
         <p className="text-xs text-ink/40">
           At least 6 characters, one number, one special character.
         </p>

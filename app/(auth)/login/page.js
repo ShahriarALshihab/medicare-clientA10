@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "@/hooks/useAuth";
 import usePageTitle from "@/hooks/usePageTitle";
 
@@ -14,6 +15,7 @@ export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,13 +64,24 @@ export default function LoginPage() {
           placeholder="Email Address"
           className="input input-bordered w-full"
         />
-        <input
-          name="password"
-          type="password"
-          required
-          placeholder="Password"
-          className="input input-bordered w-full"
-        />
+
+      
+        <div className="relative">
+          <input
+            name="password"
+            type={showPassword ? "text" : "password"}
+            required
+            placeholder="Password"
+            className="input input-bordered w-full pr-12"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-ink/40 hover:text-ink transition-colors"
+          >
+            {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+          </button>
+        </div>
 
         {error && <p className="text-sm text-error">{error}</p>}
 
