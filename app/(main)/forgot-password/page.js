@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { auth } from "@/firebase/firebase.config";
 import { HiMail, HiArrowLeft } from "react-icons/hi";
 
 export default function ForgotPasswordPage() {
@@ -55,8 +55,8 @@ export default function ForgotPasswordPage() {
           </h2>
           <p className="text-sm text-ink/60 mb-6">
             We sent a password reset link to{" "}
-            <span className="font-semibold text-primary">{email}</span>.
-            Check your inbox and follow the instructions.
+            <span className="font-semibold text-primary">{email}</span>. Check
+            your inbox and follow the instructions.
           </p>
           <Link
             href="/login"
