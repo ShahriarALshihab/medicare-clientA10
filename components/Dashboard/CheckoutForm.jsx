@@ -86,7 +86,7 @@ const CheckoutForm = ({ appointment }) => {
         disabled={!stripe || processing}
         className="btn border-none bg-primary text-white hover:bg-primary-dark"
       >
-        {processing ? "Processing..." : `Pay $${appointment.fee}`}
+        {processing ? "Processing..." : `Pay {appointment.fee}`}
       </button>
     </form>
   );

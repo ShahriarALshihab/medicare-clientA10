@@ -24,7 +24,7 @@ const DoctorCard = ({ doctor }) => {
         <p className="font-body text-xs text-ink/50">{doctor.experience} yrs experience · {doctor.hospitalName}</p>
         <div className="mt-2 flex items-center justify-between">
           <span className="font-display text-sm font-bold text-ink">${doctor.consultationFee}</span>
-          <Link href={`/doctors/${doctor._id}`} className="btn btn-sm border-none bg-primary text-white hover:bg-primary-dark">
+          <Link href={`/doctors/{doctor._id}`} className="btn btn-sm border-none bg-primary text-white hover:bg-primary-dark">
             View Profile
           </Link>
         </div>
