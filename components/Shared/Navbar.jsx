@@ -1,5 +1,6 @@
 "use client";
 
+import ThemeToggle from "@/components/Shared/ThemeToggle";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
@@ -36,6 +37,7 @@ const Navbar = () => {
           </span>
         </Link>
 
+        {/* Desktop Nav Links */}
         <div className="hidden items-center gap-7 md:flex">
           {navLinks.map((link) => (
             <Link
@@ -56,7 +58,10 @@ const Navbar = () => {
           )}
         </div>
 
+        {/* Desktop Right Side */}
         <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
+
           {user ? (
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -105,15 +110,16 @@ const Navbar = () => {
           )}
         </div>
 
-        <button
-          className="md:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <HiX size={26} /> : <HiMenu size={26} />}
-        </button>
+        {/* Mobile Right Side */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button onClick={() => setOpen(!open)} aria-label="Toggle menu">
+            {open ? <HiX size={26} /> : <HiMenu size={26} />}
+          </button>
+        </div>
       </nav>
 
+      {/* Mobile Menu */}
       {open && (
         <div className="flex flex-col gap-3 border-t border-primary/10 bg-white px-4 py-4 md:hidden">
           {navLinks.map((link) => (

@@ -65,7 +65,6 @@ export default function LoginPage() {
           className="input input-bordered w-full"
         />
 
-      
         <div className="relative">
           <input
             name="password"
@@ -81,6 +80,14 @@ export default function LoginPage() {
           >
             {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
           </button>
+        </div>
+        <div className="text-right">
+          <Link
+            href="/forgot-password"
+            className="text-xs text-primary hover:underline"
+          >
+            Forgot password?
+          </Link>
         </div>
 
         {error && <p className="text-sm text-error">{error}</p>}

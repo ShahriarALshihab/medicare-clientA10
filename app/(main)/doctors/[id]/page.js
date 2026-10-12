@@ -28,7 +28,10 @@ export default function DoctorDetailsPage() {
   usePageTitle(doctor?.doctorName || "Doctor Details");
 
   useEffect(() => {
-    Promise.all([axiosPublic.get(`/doctors/${id}`), axiosPublic.get(`/reviews/doctor/${id}`)])
+    Promise.all([
+      axiosPublic.get(`/doctors/${id}`),
+      axiosPublic.get(`/reviews/doctor/${id}`),
+    ])
       .then(([docRes, reviewRes]) => {
         setDoctor(docRes.data);
         setReviews(reviewRes.data);
@@ -60,7 +63,9 @@ export default function DoctorDetailsPage() {
       toast.success("Appointment created! Please complete payment to confirm.");
       router.push(`/dashboard/payment/${data._id}`);
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Booking failed. Please try again.");
+      toast.error(
+        err?.response?.data?.message || "Booking failed. Please try again.",
+      );
     } finally {
       setBooking(false);
     }
@@ -75,33 +80,56 @@ export default function DoctorDetailsPage() {
         <div className="md:col-span-1">
           <div className="relative h-72 w-full overflow-hidden rounded-2xl bg-primary-light">
             <Image
-              src={doctor.profileImage || "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&auto=format&fit=crop&q=60"}
+              src={
+                doctor.profileImage ||
+                "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&auto=format&fit=crop&q=60"
+              }
               alt={doctor.doctorName}
               fill
               className="object-cover"
             />
           </div>
           <div className="mt-5 rounded-2xl border border-primary/10 bg-white p-5">
-            <h1 className="font-display text-xl font-bold text-ink">{doctor.doctorName}</h1>
-            <p className="font-body text-sm font-medium text-primary">{doctor.specialization}</p>
-            <p className="mt-3 flex items-center gap-2 text-sm text-ink/60"><FaGraduationCap /> {doctor.qualifications}</p>
-            <p className="mt-1 flex items-center gap-2 text-sm text-ink/60"><FaMapMarkerAlt /> {doctor.hospitalName}</p>
-            <p className="mt-3 flex items-center gap-1 text-sm font-semibold text-amber-500">
-              <FaStar /> {doctor.ratingAverage?.toFixed(1) || "No ratings yet"} ({doctor.ratingCount} reviews)
+            <h1 className="font-display text-xl font-bold text-ink">
+              {doctor.doctorName}
+            </h1>
+            <p className="font-body text-sm font-medium text-primary">
+              {doctor.specialization}
             </p>
-            <p className="mt-3 font-display text-lg font-bold text-ink">${doctor.consultationFee} / consultation</p>
+            <p className="mt-3 flex items-center gap-2 text-sm text-ink/60">
+              <FaGraduationCap /> {doctor.qualifications}
+            </p>
+            <p className="mt-1 flex items-center gap-2 text-sm text-ink/60">
+              <FaMapMarkerAlt /> {doctor.hospitalName}
+            </p>
+            <p className="mt-3 flex items-center gap-1 text-sm font-semibold text-amber-500">
+              <FaStar /> {doctor.ratingAverage?.toFixed(1) || "No ratings yet"}{" "}
+              ({doctor.ratingCount} reviews)
+            </p>
+            <p className="mt-3 font-display text-lg font-bold text-ink">
+              ${doctor.consultationFee} / consultation
+            </p>
           </div>
         </div>
 
         <div className="md:col-span-2">
-          <form onSubmit={handleBooking} className="rounded-2xl border border-primary/10 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 font-display text-lg font-bold text-ink">Book an Appointment</h2>
+          <form
+            onSubmit={handleBooking}
+            className="rounded-2xl border border-primary/10 bg-white p-6 shadow-sm"
+          >
+            <h2 className="mb-4 font-display text-lg font-bold text-ink">
+              Book an Appointment
+            </h2>
 
             {doctor.availableSlots?.length === 0 ? (
-              <p className="text-sm text-ink/50">This doctor hasn&apos;t published a schedule yet.</p>
+              <p className="text-sm text-ink/50">
+                This doctor hasn&apos;t published a schedule yet.
+              </p>
             ) : (
               <>
-                <label className="mb-1 block text-sm font-medium text-ink/70">Choose a day</label>
+                <label className="mb-1 block text-sm font-medium text-ink/70">
+                  Choose a day
+                </label>
                 <select
                   value={selectedDay}
                   onChange={(e) => {
@@ -113,13 +141,17 @@ export default function DoctorDetailsPage() {
                 >
                   <option value="">Select a day</option>
                   {doctor.availableSlots?.map((slot) => (
-                    <option key={slot.day} value={slot.day}>{slot.day}</option>
+                    <option key={slot.day} value={slot.day}>
+                      {slot.day}
+                    </option>
                   ))}
                 </select>
 
                 {selectedDay && (
                   <>
-                    <label className="mb-1 block text-sm font-medium text-ink/70">Choose a time</label>
+                    <label className="mb-1 block text-sm font-medium text-ink/70">
+                      Choose a time
+                    </label>
                     <div className="mb-4 flex flex-wrap gap-2">
                       {doctor.availableSlots
                         .find((s) => s.day === selectedDay)
@@ -139,7 +171,9 @@ export default function DoctorDetailsPage() {
               </>
             )}
 
-            <label className="mb-1 block text-sm font-medium text-ink/70">Symptoms (optional)</label>
+            <label className="mb-1 block text-sm font-medium text-ink/70">
+              Symptoms (optional)
+            </label>
             <textarea
               value={symptoms}
               onChange={(e) => setSymptoms(e.target.value)}
@@ -148,26 +182,45 @@ export default function DoctorDetailsPage() {
               rows={3}
             />
 
-            <button type="submit" disabled={booking} className="btn w-full border-none bg-primary text-white hover:bg-primary-dark">
-              {booking ? "Booking..." : `Book & Continue to Payment ($${doctor.consultationFee})`}
+            <button
+              type="submit"
+              disabled={booking}
+              className="btn w-full border-none bg-primary text-white hover:bg-primary-dark"
+            >
+              {booking
+                ? "Booking..."
+                : `Book & Continue to Payment ($${doctor.consultationFee})`}
             </button>
           </form>
 
           <div className="mt-8">
-            <h2 className="mb-4 font-display text-lg font-bold text-ink">Patient Reviews</h2>
+            <h2 className="mb-4 font-display text-lg font-bold text-ink">
+              Patient Reviews
+            </h2>
             {reviews.length === 0 ? (
-              <p className="text-sm text-ink/50">No reviews yet for this doctor.</p>
+              <p className="text-sm text-ink/50">
+                No reviews yet for this doctor.
+              </p>
             ) : (
               <div className="flex flex-col gap-3">
                 {reviews.map((r) => (
-                  <div key={r._id} className="rounded-xl border border-primary/10 bg-white p-4">
+                  <div
+                    key={r._id}
+                    className="rounded-xl border border-primary/10 bg-white p-4"
+                  >
                     <div className="flex items-center justify-between">
-                      <p className="font-body text-sm font-semibold text-ink">{r.patientName}</p>
+                      <p className="font-body text-sm font-semibold text-ink">
+                        {r.patientName}
+                      </p>
                       <div className="flex text-amber-500">
-                        {Array.from({ length: r.rating }).map((_, i) => <FaStar key={i} size={11} />)}
+                        {Array.from({ length: r.rating }).map((_, i) => (
+                          <FaStar key={i} size={11} />
+                        ))}
                       </div>
                     </div>
-                    <p className="mt-1 font-body text-sm text-ink/60">{r.reviewText}</p>
+                    <p className="mt-1 font-body text-sm text-ink/60">
+                      {r.reviewText}
+                    </p>
                   </div>
                 ))}
               </div>

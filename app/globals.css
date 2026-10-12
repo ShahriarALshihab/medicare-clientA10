@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,3 +32,59 @@ body {
   }
 }
 
+/* Light theme */
+[data-theme="light"] {
+  --color-bg: #f0faf8;
+  --color-surface: #ffffff;
+  --color-ink: #0f1f1c;
+  --color-ink-soft: rgba(15, 31, 28, 0.5);
+  --color-border: rgba(0, 128, 100, 0.1);
+  --color-primary: #00a882;
+  --color-primary-dark: #007d62;
+  --color-primary-light: #e6f7f3;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --color-bg: #0f1f1c;
+  --color-surface: #1a2e2a;
+  --color-ink: #e6f7f3;
+  --color-ink-soft: rgba(230, 247, 243, 0.5);
+  --color-border: rgba(0, 168, 130, 0.2);
+  --color-primary: #00a882;
+  --color-primary-dark: #00c99b;
+  --color-primary-light: #1a2e2a;
+}
+
+/*  theme colors globally */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Dark mode card/surface overrides */
+[data-theme="dark"] .bg-white {
+  background-color: var(--color-surface) !important;
+}
+
+[data-theme="dark"] .text-ink {
+  color: var(--color-ink) !important;
+}
+
+[data-theme="dark"] .border-primary\/10 {
+  border-color: var(--color-border) !important;
+}
+
+[data-theme="dark"] .input,
+[data-theme="dark"] .input-bordered {
+  background-color: #243b36;
+  border-color: rgba(0, 168, 130, 0.3);
+  color: var(--color-ink);
+}
+
+[data-theme="dark"] .input::placeholder {
+  color: rgba(230, 247, 243, 0.4);
+}
