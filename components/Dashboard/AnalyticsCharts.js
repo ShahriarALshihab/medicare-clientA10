@@ -21,7 +21,7 @@ export default function AnalyticsCharts() {
     const fetchStats = async () => {
       try {
         const { data } = await axiosSecure.get(
-          `/appointments/stats?email=${user?.email}`
+          `/stats?email=${user?.email}`
         );
         setStats(data);
       } catch {
