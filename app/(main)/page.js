@@ -18,7 +18,6 @@ export default function HomePage() {
       <HowItWorks>
       </HowItWorks>
       <StatsTestimonials>
-      </StatsTestimonials>
       <AppFeatures>
       </AppFeatures>
        <WhyChooseUs />

@@ -1,145 +1,113 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { HiSearch, HiX } from "react-icons/hi";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
-const SPECIALIZATIONS = [
-  "All",
-  "Cardiology",
-  "Neurology",
-  "Orthopedics",
-  "Pediatrics",
-  "Dermatology",
-  "Gynecology",
-  "Psychiatry",
-  "Gastroenterology",
-  "Ophthalmology",
-  "General Medicine",
+const stats = [
+  { num: "10,000+", label: "Patients Served", icon: "👥" },
+  { num: "500+", label: "Verified Doctors", icon: "👨‍⚕️" },
+  { num: "50+", label: "Specializations", icon: "🏥" },
+  { num: "98%", label: "Satisfaction Rate", icon: "⭐" },
 ];
 
-const SORT_OPTIONS = [
-  { label: "Default", value: "default" },
-  { label: "Top Rated", value: "rating" },
-  { label: "Most Experienced", value: "experience" },
-  { label: "Fee: Low to High", value: "fee-asc" },
-  { label: "Fee: High to Low", value: "fee-desc" },
+const testimonials = [
+  {
+    name: "Rahim Uddin",
+    role: "Patient",
+    photo: "https://randomuser.me/api/portraits/men/32.jpg",
+    text: "MediCare Connect made it so easy to find a cardiologist near me. I booked an appointment in under 2 minutes and the doctor was excellent!",
+    rating: 5,
+  },
+  {
+    name: "Fatema Khanam",
+    role: "Patient",
+    photo: "https://randomuser.me/api/portraits/women/44.jpg",
+    text: "I love how I can manage all my family's appointments in one place. The prescription system is a game changer for us.",
+    rating: 5,
+  },
+  {
+    name: "Karim Hossain",
+    role: "Patient",
+    photo: "https://randomuser.me/api/portraits/men/67.jpg",
+    text: "Found an amazing neurologist through this platform. The whole process from booking to payment was seamless and transparent.",
+    rating: 5,
+  },
 ];
 
-export default function SearchFilter({ onFilterChange, initialSpecialization = "All" }) {
-  const [search, setSearch] = useState("");
-  const [specialization, setSpecialization] = useState(initialSpecialization);
-  const [sortBy, setSortBy] = useState("default");
-  const [maxFee, setMaxFee] = useState("");
-
- 
-  useEffect(() => {
-    setSpecialization(initialSpecialization);
-  }, [initialSpecialization]);
-
-  const handleChange = (updates) => {
-    const newFilters = { search, specialization, sortBy, maxFee, ...updates };
-    if (updates.search !== undefined) setSearch(updates.search);
-    if (updates.specialization !== undefined) setSpecialization(updates.specialization);
-    if (updates.sortBy !== undefined) setSortBy(updates.sortBy);
-    if (updates.maxFee !== undefined) setMaxFee(updates.maxFee);
-    onFilterChange(newFilters);
-  };
-
-  const handleReset = () => {
-    setSearch("");
-    setSpecialization("All");
-    setSortBy("default");
-    setMaxFee("");
-    onFilterChange({ search: "", specialization: "All", sortBy: "default", maxFee: "" });
-  };
-
-  const hasActiveFilters = search || specialization !== "All" || sortBy !== "default" || maxFee;
-
+export default function StatsTestimonials() {
   return (
-    <div className="rounded-2xl border border-primary/10 bg-white p-5 shadow-sm mb-8">
-      <div className="flex flex-col gap-4">
-        {/* Search */}
-        <div className="relative">
-          <HiSearch size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40" />
-          <input
-            type="text"
-            placeholder="Search by doctor name..."
-            value={search}
-            onChange={(e) => handleChange({ search: e.target.value })}
-            className="input input-bordered w-full pl-11"
-          />
-          {search && (
-            <button
-              onClick={() => handleChange({ search: "" })}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-ink/40 hover:text-ink"
+    <section className="py-20 bg-gradient-to-b from-primary-light to-white">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4 mb-20">
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="flex flex-col items-center rounded-2xl bg-white p-6 text-center shadow-sm border border-primary/10"
             >
-              <HiX size={16} />
-            </button>
-          )}
+              <span className="text-3xl mb-2">{s.icon}</span>
+              <p className="font-display text-3xl font-bold text-primary">
+                {s.num}
+              </p>
+              <p className="font-body text-sm text-ink/60 mt-1">{s.label}</p>
+            </motion.div>
+          ))}
         </div>
 
-  
-        <div className="flex flex-col sm:flex-row gap-3">
-          <select
-            value={specialization}
-            onChange={(e) => handleChange({ specialization: e.target.value })}
-            className="select select-bordered flex-1"
-          >
-            {SPECIALIZATIONS.map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
-          <select
-            value={sortBy}
-            onChange={(e) => handleChange({ sortBy: e.target.value })}
-            className="select select-bordered flex-1"
-          >
-            {SORT_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>{o.label}</option>
-            ))}
-          </select>
-          <input
-            type="number"
-            placeholder="Max fee ($)"
-            value={maxFee}
-            onChange={(e) => handleChange({ maxFee: e.target.value })}
-            className="input input-bordered flex-1"
-            min="0"
-          />
+        <div className="text-center mb-12">
+          <p className="mb-2 font-body text-sm font-semibold uppercase tracking-wider text-primary">
+            Patient Stories
+          </p>
+          <h2 className="font-display text-3xl font-bold text-ink md:text-4xl">
+            What Our Patients Say
+          </h2>
         </div>
 
-        
-        {hasActiveFilters && (
-          <div className="flex items-center justify-between flex-wrap gap-2">
-            <div className="flex flex-wrap gap-2">
-              {search && (
-                <span className="badge badge-primary badge-outline gap-1">
-                  Search: {search}
-                  <button onClick={() => handleChange({ search: "" })}><HiX size={12} /></button>
-                </span>
-              )}
-              {specialization !== "All" && (
-                <span className="badge badge-primary badge-outline gap-1">
-                  {specialization}
-                  <button onClick={() => handleChange({ specialization: "All" })}><HiX size={12} /></button>
-                </span>
-              )}
-              {maxFee && (
-                <span className="badge badge-primary badge-outline gap-1">
-                  Max: ${maxFee}
-                  <button onClick={() => handleChange({ maxFee: "" })}><HiX size={12} /></button>
-                </span>
-              )}
-            </div>
-            <button
-              onClick={handleReset}
-              className="text-xs text-ink/50 hover:text-primary transition-colors font-medium"
+        <div className="grid gap-6 md:grid-cols-3">
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={t.name}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.15 }}
+              className="flex flex-col gap-4 rounded-2xl border border-primary/10 bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
             >
-              Reset all
-            </button>
-          </div>
-        )}
+              <div className="flex gap-1">
+                {Array.from({ length: t.rating }).map((_, j) => (
+                  <span key={j} className="text-amber-400 text-sm">
+                    ★
+                  </span>
+                ))}
+              </div>
+
+              <p className="font-body text-sm text-ink/70 leading-relaxed flex-1">
+                &ldquo;{t.text}&rdquo;
+              </p>
+
+              <div className="flex items-center gap-3 pt-2 border-t border-primary/10">
+                <div className="relative h-10 w-10 overflow-hidden rounded-full flex-shrink-0">
+                  <Image
+                    src={t.photo}
+                    alt={t.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-body text-sm font-bold text-ink">
+                    {t.name}
+                  </p>
+                  <p className="font-body text-xs text-ink/50">{t.role}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
