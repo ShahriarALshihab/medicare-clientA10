@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HiSearch, HiX } from "react-icons/hi";
 
 const SPECIALIZATIONS = [
@@ -25,26 +25,23 @@ const SORT_OPTIONS = [
   { label: "Fee: High to Low", value: "fee-desc" },
 ];
 
-export default function SearchFilter({ onFilterChange }) {
+export default function SearchFilter({ onFilterChange, initialSpecialization = "All" }) {
   const [search, setSearch] = useState("");
-  const [specialization, setSpecialization] = useState("All");
+  const [specialization, setSpecialization] = useState(initialSpecialization);
   const [sortBy, setSortBy] = useState("default");
   const [maxFee, setMaxFee] = useState("");
 
+  
+  useEffect(() => {
+    setSpecialization(initialSpecialization);
+  }, [initialSpecialization]);
+
   const handleChange = (updates) => {
-    const newFilters = {
-      search,
-      specialization,
-      sortBy,
-      maxFee,
-      ...updates,
-    };
-    // Update local state
+    const newFilters = { search, specialization, sortBy, maxFee, ...updates };
     if (updates.search !== undefined) setSearch(updates.search);
     if (updates.specialization !== undefined) setSpecialization(updates.specialization);
     if (updates.sortBy !== undefined) setSortBy(updates.sortBy);
     if (updates.maxFee !== undefined) setMaxFee(updates.maxFee);
-    // Pass to parent
     onFilterChange(newFilters);
   };
 
@@ -61,12 +58,9 @@ export default function SearchFilter({ onFilterChange }) {
   return (
     <div className="rounded-2xl border border-primary/10 bg-white p-5 shadow-sm mb-8">
       <div className="flex flex-col gap-4">
-        {/* Search Bar */}
+       
         <div className="relative">
-          <HiSearch
-            size={18}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40"
-          />
+          <HiSearch size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40" />
           <input
             type="text"
             placeholder="Search by doctor name..."
@@ -84,9 +78,8 @@ export default function SearchFilter({ onFilterChange }) {
           )}
         </div>
 
-        {/* Filters Row */}
+        
         <div className="flex flex-col sm:flex-row gap-3">
-          {/* Specialization */}
           <select
             value={specialization}
             onChange={(e) => handleChange({ specialization: e.target.value })}
@@ -96,8 +89,6 @@ export default function SearchFilter({ onFilterChange }) {
               <option key={s} value={s}>{s}</option>
             ))}
           </select>
-
-          {/* Sort */}
           <select
             value={sortBy}
             onChange={(e) => handleChange({ sortBy: e.target.value })}
@@ -107,8 +98,6 @@ export default function SearchFilter({ onFilterChange }) {
               <option key={o.value} value={o.value}>{o.label}</option>
             ))}
           </select>
-
-          {/* Max Fee */}
           <input
             type="number"
             placeholder="Max fee ($)"
@@ -119,9 +108,9 @@ export default function SearchFilter({ onFilterChange }) {
           />
         </div>
 
-        {/* Active filters + Reset */}
+       
         {hasActiveFilters && (
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex flex-wrap gap-2">
               {search && (
                 <span className="badge badge-primary badge-outline gap-1">

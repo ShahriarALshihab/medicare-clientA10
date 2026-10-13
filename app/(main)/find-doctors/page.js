@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import axiosPublic from "@/lib/axiosPublic";
 import DoctorCard from "@/components/Doctors/DoctorCard";
 import LoadingSpinner from "@/components/Shared/LoadingSpinner";
 import usePageTitle from "@/hooks/usePageTitle";
 import SearchFilter from "@/components/Doctors/SearchFilter";
 
-export default function FindDoctorsPage() {
+function FindDoctorsContent() {
   usePageTitle("Find Doctors");
+  const searchParams = useSearchParams();
 
   const [doctors, setDoctors] = useState([]);
   const [page, setPage] = useState(1);
@@ -16,10 +18,18 @@ export default function FindDoctorsPage() {
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
     search: "",
-    specialization: "All",
+    specialization: searchParams.get("specialization") || "All",
     sortBy: "default",
     maxFee: "",
   });
+
+  
+  useEffect(() => {
+    const spec = searchParams.get("specialization");
+    if (spec) {
+      setFilters((prev) => ({ ...prev, specialization: spec }));
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     setLoading(true);
@@ -44,7 +54,7 @@ export default function FindDoctorsPage() {
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
-    setPage(1); // reset to page 1 on filter change
+    setPage(1);
   };
 
   return (
@@ -54,23 +64,43 @@ export default function FindDoctorsPage() {
         <h1 className="font-display text-3xl font-bold text-ink">
           Find Your Doctor
         </h1>
-        <p className="font-body text-sm text-ink/50">
-          Search by name or specialization, then sort to find the right fit.
+        <p className="font-body text-sm text-ink/50 mt-1">
+          {filters.specialization !== "All"
+            ? `Showing ${filters.specialization} specialists`
+            : "Search by name or specialization, then sort to find the right fit."}
         </p>
       </div>
 
-      {/* SearchFilter Component */}
-      <SearchFilter onFilterChange={handleFilterChange} />
+     
+      {filters.specialization !== "All" && (
+        <div className="mb-4 flex items-center gap-2">
+          <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+            🔍 {filters.specialization}
+            <button
+              onClick={() =>
+                handleFilterChange({ ...filters, specialization: "All" })
+              }
+              className="ml-1 text-primary/60 hover:text-primary"
+            >
+              ✕
+            </button>
+          </span>
+        </div>
+      )}
 
-      {/* Results */}
+   
+      <SearchFilter
+        onFilterChange={handleFilterChange}
+        initialSpecialization={filters.specialization}
+      />
+
+      
       {loading ? (
         <LoadingSpinner message="Searching doctors..." />
       ) : doctors.length === 0 ? (
         <div className="py-16 text-center">
           <p className="text-4xl mb-3">🔍</p>
-          <p className="font-body text-ink/50">
-            No doctors matched your search.
-          </p>
+          <p className="font-body text-ink/50">No doctors matched your search.</p>
           <button
             onClick={() =>
               handleFilterChange({
@@ -93,7 +123,7 @@ export default function FindDoctorsPage() {
         </div>
       )}
 
-      {/* Pagination */}
+     
       {totalPages > 1 && (
         <div className="mt-10 flex justify-center gap-2">
           {Array.from({ length: totalPages }).map((_, i) => (
@@ -112,5 +142,13 @@ export default function FindDoctorsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function FindDoctorsPage() {
+  return (
+    <Suspense fallback={<LoadingSpinner message="Loading..." />}>
+      <FindDoctorsContent />
+    </Suspense>
   );
 }
