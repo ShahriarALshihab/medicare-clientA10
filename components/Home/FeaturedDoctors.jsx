@@ -30,7 +30,8 @@ export default function FeaturedDoctors() {
             Meet Our Featured Doctors
           </h2>
           <p className="mt-3 font-body text-sm text-ink/50 max-w-md mx-auto">
-            Handpicked specialists with outstanding patient reviews and proven expertise.
+            Handpicked specialists with outstanding patient reviews and proven
+            expertise.
           </p>
         </div>
 
@@ -98,7 +99,7 @@ export default function FeaturedDoctors() {
                       </span>
                     </span>
                     <Link
-                      href={`/doctors/{doctor._id}`}
+                      href={`/doctors/${doctor._id}`}
                       className="btn btn-sm border-none bg-primary text-white hover:bg-primary-dark"
                     >
                       View Profile
