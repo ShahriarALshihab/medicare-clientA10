@@ -12,10 +12,9 @@ Patients book trusted doctors and pay online, doctors manage schedules and issue
 
 ## 🔗 Quick Link
 
-| Resource | Link |
-| --- | --- |
+| Resource       | Link                                                                      |
+| -------------- | ------------------------------------------------------------------------- |
 | 🌐 Live Client | [medicare-client-a10.vercel.app](https://medicare-client-a10.vercel.app/) |
-
 
 > **Note:** The server runs on Render's free tier, so the first request after a period of inactivity can take up to a minute while the service wakes up.
 
@@ -47,6 +46,7 @@ The client is built with **Next.js (App Router)** and talks to a separate **Expr
 ## ✨ Key Features
 
 ### 🌐 Public Experience
+
 - Animated hero slideshow with a blurred background and clear calls to action
 - Clickable **medical specialization cards**: selecting one opens Find Doctors already filtered to that specialty
 - Featured top-rated doctors, platform statistics, patient success stories, and a "How it works" guide
@@ -57,6 +57,7 @@ The client is built with **Next.js (App Router)** and talks to a separate **Expr
 - Custom 404 page and loading states
 
 ### 🔐 Authentication
+
 - Email and password registration with password validation (minimum 6 characters, one number, one special character)
 - Google sign-in
 - Show / hide password toggle on login and register forms
@@ -65,6 +66,7 @@ The client is built with **Next.js (App Router)** and talks to a separate **Expr
 - Role-based route protection that keeps logged-in users signed in across page reloads
 
 ### 🧑‍⚕️ Patient Features
+
 - Book appointments by choosing a day and time slot and describing symptoms
 - Secure online payment with **Stripe** and a full payment history
 - Reschedule or cancel pending appointments
@@ -74,6 +76,7 @@ The client is built with **Next.js (App Router)** and talks to a separate **Expr
 - Profile management
 
 ### 👨‍⚕️ Doctor Features
+
 - Create, edit, and remove weekly availability slots
 - Accept, reject, and complete appointment requests
 - Write and manage digital prescriptions
@@ -81,6 +84,7 @@ The client is built with **Next.js (App Router)** and talks to a separate **Expr
 - Doctor profiles appear publicly only after admin verification
 
 ### 🛡️ Admin Features
+
 - Manage all users and their roles
 - Verify or reject doctor registrations
 - Monitor every appointment and payment record
@@ -90,11 +94,11 @@ The client is built with **Next.js (App Router)** and talks to a separate **Expr
 
 ## 👥 User Roles
 
-| Role | Access |
-| --- | --- |
+| Role        | Access                                                                   |
+| ----------- | ------------------------------------------------------------------------ |
 | **Patient** | Book appointments, pay, review doctors, view prescriptions and analytics |
-| **Doctor** | Manage schedule, handle appointment requests, issue prescriptions |
-| **Admin** | Manage users and doctors, monitor appointments and payments |
+| **Doctor**  | Manage schedule, handle appointment requests, issue prescriptions        |
+| **Admin**   | Manage users and doctors, monitor appointments and payments              |
 
 Each role gets its own dashboard menu, and routes are guarded so users can only open pages that belong to their role.
 
@@ -102,36 +106,36 @@ Each role gets its own dashboard menu, and routes are guarded so users can only 
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-| --- | --- |
-| Framework | Next.js 14 (App Router) with JavaScript |
-| Styling | Tailwind CSS and DaisyUI |
-| Animation | Framer Motion |
+| Layer          | Technology                                          |
+| -------------- | --------------------------------------------------- |
+| Framework      | Next.js 14 (App Router) with JavaScript             |
+| Styling        | Tailwind CSS and DaisyUI                            |
+| Animation      | Framer Motion                                       |
 | Authentication | Firebase Authentication (Email/Password and Google) |
-| HTTP Client | Axios with secured and public instances |
-| Payments | Stripe |
-| Charts | Recharts |
-| Notifications | React Hot Toast and SweetAlert2 |
-| Backend | Express.js, MongoDB (Mongoose), JWT, Firebase Admin |
-| Hosting | Vercel (client) and Render (server) |
+| HTTP Client    | Axios with secured and public instances             |
+| Payments       | Stripe                                              |
+| Charts         | Recharts                                            |
+| Notifications  | React Hot Toast and SweetAlert2                     |
+| Backend        | Express.js, MongoDB (Mongoose), JWT, Firebase Admin |
+| Hosting        | Vercel (client) and Render (server)                 |
 
 ---
 
 ## 📦 NPM Packages
 
-| Package | Purpose |
-| --- | --- |
-| `next` | React framework with App Router |
-| `react` / `react-dom` | UI library |
-| `tailwindcss` / `daisyui` | Utility-first styling and UI components |
-| `firebase` | Authentication |
-| `axios` | API requests |
-| `framer-motion` | Page and section animations |
-| `react-icons` | Icon library |
-| `react-hot-toast` | Toast notifications |
-| `sweetalert2` | Confirmation dialogs |
-| `recharts` | Analytics charts |
-| `@stripe/stripe-js` / `@stripe/react-stripe-js` | Stripe payment form |
+| Package                                         | Purpose                                 |
+| ----------------------------------------------- | --------------------------------------- |
+| `next`                                          | React framework with App Router         |
+| `react` / `react-dom`                           | UI library                              |
+| `tailwindcss` / `daisyui`                       | Utility-first styling and UI components |
+| `firebase`                                      | Authentication                          |
+| `axios`                                         | API requests                            |
+| `framer-motion`                                 | Page and section animations             |
+| `react-icons`                                   | Icon library                            |
+| `react-hot-toast`                               | Toast notifications                     |
+| `sweetalert2`                                   | Confirmation dialogs                    |
+| `recharts`                                      | Analytics charts                        |
+| `@stripe/stripe-js` / `@stripe/react-stripe-js` | Stripe payment form                     |
 
 ---
 
@@ -170,6 +174,7 @@ medicare-client/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 18 or later
 - A Firebase project with Email/Password and Google sign-in enabled
 - The [MediCare Connect server](https://github.com/ShahriarALshihab/medicareConnect-serverA10) running locally or deployed
@@ -178,10 +183,11 @@ medicare-client/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/ShahriarALshihab/medicare-client.git
+git clone https://github.com/ShahriarALshihab/medicare-clientA10.git
 
 # 2. Move into the project folder
-cd medicare-client
+cd medicare-clientA10
+
 
 # 3. Install dependencies
 npm install
@@ -198,12 +204,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Available Scripts
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the development server |
+| Command         | Description                          |
+| --------------- | ------------------------------------ |
+| `npm run dev`   | Start the development server         |
 | `npm run build` | Create an optimized production build |
-| `npm start` | Run the production build |
-| `npm run lint` | Run ESLint |
+| `npm start`     | Run the production build             |
+| `npm run lint`  | Run ESLint                           |
 
 ---
 
@@ -236,9 +242,9 @@ NEXT_PUBLIC_STRIPE_PK=
 
 ## ☁️ Deployment
 
-| Part | Platform | Notes |
-| --- | --- | --- |
-| Client | **Vercel** | Add every environment variable above in the project settings, then push to `main` to auto-deploy |
+| Part   | Platform   | Notes                                                                                                                  |
+| ------ | ---------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Client | **Vercel** | Add every environment variable above in the project settings, then push to `main` to auto-deploy                       |
 | Server | **Render** | Allow your Vercel URL in the server's CORS configuration and set the database, JWT, Firebase Admin, and Stripe secrets |
 
 After deploying, add your Vercel domain to **Firebase Console → Authentication → Settings → Authorized domains** so Google sign-in works on the live site.
