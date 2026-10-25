@@ -7,26 +7,9 @@ import { useEffect, useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 const slides = [
-  {
-    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1400&q=80",
-    alt: "Doctor consulting patient",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=1400&q=80",
-    alt: "Modern hospital facility",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=1400&q=80",
-    alt: "Doctor with stethoscope",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1400&q=80",
-    alt: "Medical consultation",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=1400&q=80",
-    alt: "Healthcare professionals",
-  },
+  { image: "/hero/slide-1.jpg", alt: "Doctor consulting patient" },
+  { image: "/hero/slide-2.jpg", alt: "Modern hospital facility" },
+  { image: "/hero/slide-3.jpg", alt: "Doctor with stethoscope" },
 ];
 
 export default function Banner() {
